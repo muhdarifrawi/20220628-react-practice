@@ -1,6 +1,8 @@
-import React from "react"
+import React from "react";
+// you cannot import anything out of SRC without AXIOS
+import JSON from "../data/info.json"
 
-export default class ExampleForm extends React.Component{
+export default class SecondExampleForm extends React.Component{
     state={
         username:"yosemite sam",
         fruits:"",
@@ -89,42 +91,23 @@ export default class ExampleForm extends React.Component{
                     </div>
                     {/* COUNTRY SECTION */}
                     <h3>Countries you've been to</h3>
-                    <div className="form-check">
-                        <input type="checkbox" name="singapore"
-                        className="form-check-input"
-                        value="singapore"
-                        onChange={this.updateCountry}
-                        checked={this.state.country.includes("singapore") === true}
-                        >
-                        </input>
-                        <label for="singapore" className="form-check-label">
-                            Singapore
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input type="checkbox" name="malaysia"
-                        className="form-check-input"
-                        value="malaysia"
-                        onChange={this.updateCountry}
-                        checked={this.state.country.includes("malaysia") === true}
-                        >
-                        </input>
-                        <label for="malaysia" className="form-check-label">
-                            Malaysia
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input type="checkbox" name="indonesia"
-                        className="form-check-input"
-                        value="indonesia"
-                        onChange={this.updateCountry}
-                        checked={this.state.country.includes("indonesia") === true}
-                        >
-                        </input>
-                        <label for="indonesia" className="form-check-label">
-                            Indonesia
-                        </label>
-                    </div>
+                    {JSON.countries.map(
+                        c => 
+                            <div className="form-check" key={c.value}>
+                                <input type="checkbox" name={c.value}
+                                className="form-check-input"
+                                value={c.value}
+                                onChange={this.updateCountry}
+                                checked={this.state.country.includes(c.value) === true}
+                                >
+                                </input>
+                                <label for={c.value} className="form-check-label">
+                                    {c.display}
+                                </label>
+                            </div>
+                    )}
+
+
                 </div>
             </React.Fragment>
             
